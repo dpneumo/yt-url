@@ -1,6 +1,7 @@
 require 'yt/core'
 require_relative 'parser'
 require_relative 'resource_id'
+require_relative 'resources'
 
 # An object-oriented Ruby client for YouTube.
 # @see http://www.rubydoc.info/gems/yt/
@@ -12,13 +13,8 @@ module Yt
   #   url.id # => 'UC4lU5YG9QDgs0X2jdnt7cdQ'
   #   url.resource # => #<Yt::Channel @id=UC4lU5YG9QDgs0X2jdnt7cdQ>
   class URL
-    # @param [String] text the name or URL of a YouTube resource (in any form).
-    attr_reader :text, :info
-    def initialize(text, opts={})
-      set_internal_vars(opts)
-      @text = text.to_s.strip
-      @info = match(text)
-    end
+    # @return [Hash] the information retrieved from the text of the URL
+    attr_reader :info
 
   ### URL info
 
@@ -39,8 +35,18 @@ module Yt
     end
 
   private
-    attr_reader :parser, :resource_id, :channel, :video, :playlist
-    def match(text)
+    attr_reader :text, :parser, :resource_id
+
+    # @param [String] text the name or URL of a YouTube resource (in any form).
+    def initialize(text, opts={})
+      @parser = opts.fetch :parser, Yt::YTUrlParser
+      @resource_id = opts.fetch :resource_id, Yt::YTResourceId
+      @resources = opts.fetch :resources, Yt::Resources
+      @text = text.to_s.strip
+      @info = parse(text)
+    end
+
+    def parse(text)
       parser.new.parse(text)
     end
 
@@ -53,19 +59,7 @@ module Yt
     end
 
     def resources
-      r = Hash.new(  -> (_) {raise Yt::NoItemsError} )
-      r[:channel]  = -> (options) {channel.new options}
-      r[:video]    = -> (options) {video.new options}
-      r[:playlist] = -> (options) {playlist.new options}
-      r
-    end
-
-    def set_internal_vars(opts)
-      @parser = opts.fetch :parser, Yt::YTUrlParser
-      @resource_id = opts.fetch :resource_id, Yt::YTResourceId
-      @channel = opts.fetch :channel, Yt::Channel
-      @video = opts.fetch :video, Yt::Video
-      @playlist = opts.fetch :playlist, Yt::Playlist
+      @resources.dictionary
     end
   end
 end
