@@ -39,9 +39,7 @@ module Yt
 
     # @param [String] text the name or URL of a YouTube resource (in any form).
     def initialize(text, opts={})
-      @parser = opts.fetch :parser, Yt::YTUrlParser
-      @resource_id = opts.fetch :resource_id, Yt::YTResourceId
-      @resources = opts.fetch :resources, Yt::Resources
+      inject_dependencies(opts)
       @text = text.to_s.strip
       @info = parse(text)
     end
@@ -60,6 +58,12 @@ module Yt
 
     def resources
       @resources.dictionary
+    end
+
+    def inject_dependencies(opts)
+      @parser      = opts.fetch :parser,      Yt::YTUrlParser
+      @resource_id = opts.fetch :resource_id, Yt::YTResourceId
+      @resources   = opts.fetch :resources,   Yt::Resources
     end
   end
 end
