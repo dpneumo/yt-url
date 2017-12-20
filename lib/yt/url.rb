@@ -13,10 +13,11 @@ module Yt
   #   url.resource # => #<Yt::Channel @id=UC4lU5YG9QDgs0X2jdnt7cdQ>
   class URL
     # @param [String] text the name or URL of a YouTube resource (in any form).
-    attr_reader :text
+    attr_reader :text, :info
     def initialize(text, opts={})
-      @text = text.to_s.strip
       set_internal_vars(opts)
+      @text = text.to_s.strip
+      @info = match(text)
     end
 
   ### URL info
@@ -24,12 +25,12 @@ module Yt
     # @return [Symbol] the kind of YouTube resource matching the URL.
     # Possible values are: +:playlist+, +:video+, +:channel+, and +:unknown:.
     def kind
-      match[:kind]
+      info[:kind]
     end
 
     # @return [<String, nil>] the ID of the YouTube resource matching the URL.
     def id
-      match['id'] ||= rsrc_id.new(match).fetch
+      info['id'] ||= rsrc_id.new(info).fetch
     end
 
     # @return [<Yt::Channel>] the resource associated with the URL
@@ -39,8 +40,8 @@ module Yt
 
   private
     attr_reader :parser, :rsrc_id, :channel, :video, :playlist
-    def match
-      @match ||= parser.new.parse(text)
+    def match(text)
+      parser.new.parse(text)
     end
 
     def resources
