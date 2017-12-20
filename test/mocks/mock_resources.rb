@@ -1,3 +1,4 @@
+require_relative 'mock_channel'
 module Yt
   class MockResources
     def self.dictionary

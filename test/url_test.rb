@@ -1,6 +1,5 @@
 require 'minitest/autorun'
 require_relative '../lib/yt/url'
-require_relative 'mocks/mock_channel'
 require_relative 'mocks/mock_resource_id'
 require_relative 'mocks/mock_resources'
 
