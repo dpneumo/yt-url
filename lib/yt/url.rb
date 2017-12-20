@@ -30,7 +30,7 @@ module Yt
 
     # @return [<String, nil>] the ID of the YouTube resource matching the URL.
     def id
-      info['id'] ||= rsrc_id.new(info).fetch
+      info['id'] || resource_id
     end
 
     # @return [<Yt::Channel>] the resource associated with the URL
@@ -42,6 +42,10 @@ module Yt
     attr_reader :parser, :rsrc_id, :channel, :video, :playlist
     def match(text)
       parser.new.parse(text)
+    end
+
+    def resource_id
+      @resource_id ||= rsrc_id.new(info).fetch
     end
 
     def resources
