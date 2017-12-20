@@ -35,7 +35,7 @@ module Yt
 
     # @return [<Yt::Channel>] the resource associated with the URL
     def resource(options = {})
-      @resource ||= resources[kind].call options.merge(id: id)
+      rsrc(options)
     end
 
   private
@@ -46,6 +46,10 @@ module Yt
 
     def resource_id
       @resource_id ||= rsrc_id.new(info).fetch
+    end
+
+    def rsrc(options)
+      @rsrc ||= resources[kind].call options.merge(id: id)
     end
 
     def resources
