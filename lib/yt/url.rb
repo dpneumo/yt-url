@@ -30,7 +30,7 @@ module Yt
 
     # @return [<String, nil>] the ID of the YouTube resource matching the URL.
     def id
-      info['id'] || resource_id
+      info['id'] || rsrc_id
     end
 
     # @return [<Yt::Channel>] the resource associated with the URL
@@ -39,13 +39,13 @@ module Yt
     end
 
   private
-    attr_reader :parser, :rsrc_id, :channel, :video, :playlist
+    attr_reader :parser, :resource_id, :channel, :video, :playlist
     def match(text)
       parser.new.parse(text)
     end
 
-    def resource_id
-      @resource_id ||= rsrc_id.new(info).fetch
+    def rsrc_id
+      @rsrc_id ||= resource_id.new(info).fetch
     end
 
     def rsrc(options)
@@ -62,7 +62,7 @@ module Yt
 
     def set_internal_vars(opts)
       @parser = opts.fetch :parser, Yt::YTUrlParser
-      @rsrc_id = opts.fetch :rsrc_id, Yt::YTResourceId
+      @resource_id = opts.fetch :resource_id, Yt::YTResourceId
       @channel = opts.fetch :channel, Yt::Channel
       @video = opts.fetch :video, Yt::Video
       @playlist = opts.fetch :playlist, Yt::Playlist
