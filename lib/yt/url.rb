@@ -38,6 +38,7 @@ module Yt
     attr_reader :text, :parser, :resource_id
 
     # @param [String] text the name or URL of a YouTube resource (in any form).
+    # @param [Hash] opts dependencies for testing. Defaults are provided.
     def initialize(text, opts={})
       inject_dependencies(opts)
       @text = text.to_s.strip
