@@ -3,13 +3,6 @@ module Yt
   # Retrieves the YouTube resource id given the format and name of the resource
   # Queries the YouTube API
   class YTResourceId
-    attr_reader :url_elements
-
-    # @param [Hash] url_elements a hash of the format and name of the resource
-    def initialize(url_elements)
-      @url_elements
-    end
-
     # @return [<String, nil>] the ID of the YouTube resource
     # Will raise Yt::NoItemsError if the query response does not provide an ID
     def fetch_id
@@ -19,6 +12,13 @@ module Yt
     end
 
   private
+    attr_reader :url_elements
+
+    # @param [Hash] url_elements a hash of the format and name of the resource
+    def initialize(url_elements)
+      @url_elements
+    end
+
     def query_for_resource
       url = "/#{url_elements['format']}#{url_elements['name']}"
       Net::HTTP.start 'www.youtube.com', 443, use_ssl: true do |http|
