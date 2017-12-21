@@ -16,7 +16,7 @@ module Yt
 
     # @param [Hash] url_elements a hash of the format and name of the resource
     def initialize(url_elements)
-      @url_elements
+      @url_elements = url_elements
     end
 
     def query_for_resource
