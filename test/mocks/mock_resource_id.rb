@@ -6,7 +6,7 @@ module Yt
       @url_elements = url_elements
     end
 
-    def fetch
+    def fetch_id
       case url_elements["name"]
       when "UC4lU5YG9QDgs0X2jdnt7cdQ"
         "UC4lU5YG9QDgs0X2jdnt7cdQ"

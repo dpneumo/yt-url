@@ -50,7 +50,7 @@ module Yt
     end
 
     def rsrc_id
-      @rsrc_id ||= resource_id.new(info).fetch
+      @rsrc_id ||= resource_id.new(info).fetch_id
     end
 
     def rsrc(options)

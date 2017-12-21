@@ -12,7 +12,7 @@ module Yt
 
     # @return [<String, nil>] the ID of the YouTube resource
     # Will raise Yt::NoItemsError if the query response does not provide an ID
-    def fetch
+    def fetch_id
       response = query_for_resource
       response = query_redirect(location) if response.is_a?(Net::HTTPRedirection)
       extract_id(response)
