@@ -13,10 +13,10 @@ module Yt
   #   url.id # => 'UC4lU5YG9QDgs0X2jdnt7cdQ'
   #   url.resource # => #<Yt::Channel @id=UC4lU5YG9QDgs0X2jdnt7cdQ>
   class URL
+  ### URL info
+
     # @return [Hash] the information retrieved from the text of the URL
     attr_reader :info
-
-  ### URL info
 
     # @return [Symbol] the kind of YouTube resource matching the URL.
     # Possible values are: +:playlist+, +:video+, +:channel+, and +:unknown:.

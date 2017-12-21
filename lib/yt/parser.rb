@@ -2,6 +2,8 @@
 require_relative 'patterns'
 module Yt
   class YTUrlParser
+    # @param [String] text the URL to be parsed
+    # @return [Hash] the information parsed out of the text
     def parse(text)
       patterns.
       map {|kind,regex| regex.match(text) {|m| tag_captures(m,kind)} }.
@@ -9,8 +11,9 @@ module Yt
       first
     end
 
-    private
+  private
     attr_reader :patterns
+
     def initialize(patterns = Patterns)
       @patterns = patterns.new.unfolded
       freeze
