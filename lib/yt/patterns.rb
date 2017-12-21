@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 module Yt
   class Patterns
+    # @return [Array] the tagged regex's used to parse the URL
     def unfolded
       tagged_patterns.flat_map {|patterns| unfold(patterns) }
     end

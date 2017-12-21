@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 module Yt
+  # Retrieves the YouTube resource id given the format and name of the resource
+  # Queries the YouTube API
   class YTResourceId
     attr_reader :url_elements
+
+    # @param [Hash] url_elements a hash of the format and name of the resource
     def initialize(url_elements)
       @url_elements
     end
 
+    # @return [<String, nil>] the ID of the YouTube resource
+    # Will raise Yt::NoItemsError if the query response does not provide an ID
     def fetch
       response = query_for_resource
       response = query_redirect(location) if response.is_a?(Net::HTTPRedirection)
