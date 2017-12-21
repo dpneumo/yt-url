@@ -9,3 +9,9 @@ desc "Run all examples"
 RSpec::Core::RakeTask.new :spec
 
 task default: [:spec]
+
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.pattern = "test/*_test.rb"
+end

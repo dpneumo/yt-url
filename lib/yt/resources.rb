@@ -1,5 +1,5 @@
 module Yt
-  class Resources
+  class YTResources
     # @return [Hash] a dictionary of resource creation lambdas
     def self.dictionary
       r = Hash.new(   -> (_) {raise Yt::NoItemsError} )

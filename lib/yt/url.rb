@@ -64,7 +64,7 @@ module Yt
     def inject_dependencies(opts)
       @parser      = opts.fetch :parser,      Yt::YTUrlParser
       @resource_id = opts.fetch :resource_id, Yt::YTResourceId
-      @resources   = opts.fetch :resources,   Yt::Resources
+      @resources   = opts.fetch :resources,   Yt::YTResources
     end
   end
 end

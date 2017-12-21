@@ -6,6 +6,6 @@ class ResourcesTest < MiniTest::Test
   include ResourcesInterfaceTest
 
   def setup
-    @object = Yt::Resources
+    @object = Yt::YTResources
   end
 end
