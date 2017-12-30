@@ -1,13 +1,11 @@
-require 'minitest/autorun'
-require_relative 'interface_test'
-require_relative 'mocks/mock_resource_id'
-require_relative 'mocks/mock_resources'
+require_relative 'test_helper'
 
 class MockResourceIdTest < MiniTest::Test
   include ResourceIdInterfaceTest
 
   def setup
-    @res_id = @object = Yt::MockResourceId.new('format' => :channel, 'name' => 'abcd123')
+    @res_id = @object = MockResourceId.new( 'format' => :channel,
+                                            'name'   => 'abcd123' )
   end
 end
 
@@ -15,6 +13,14 @@ class MockResourcesTest < MiniTest::Test
   include ResourcesInterfaceTest
 
   def setup
-    @object = Yt::MockResources
+    @object = MockResources
+  end
+end
+
+class MockYtLinkTest < MiniTest::Test
+  include YtLinkInterfaceTest
+
+  def setup
+    @object = MockYtLink.new
   end
 end

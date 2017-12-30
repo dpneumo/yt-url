@@ -15,8 +15,12 @@ module Yt
   class URL
   ### URL info
 
-    # @return [Hash] the information retrieved from the text of the URL
-    attr_reader :info
+    # @param [String] text the name or URL of a YouTube resource (in any form).
+    # @param [Hash] opts dependencies for testing. Defaults are provided.
+    def initialize(text, opts={})
+      inject_dependencies(opts)
+      @text = text.to_s.strip
+    end
 
     # @return [Symbol] the kind of YouTube resource matching the URL.
     # Possible values are: +:playlist+, +:video+, +:channel+, and +:unknown:.
@@ -37,15 +41,7 @@ module Yt
   private
     attr_reader :text, :parser, :resource_id
 
-    # @param [String] text the name or URL of a YouTube resource (in any form).
-    # @param [Hash] opts dependencies for testing. Defaults are provided.
-    def initialize(text, opts={})
-      inject_dependencies(opts)
-      @text = text.to_s.strip
-      @info = parse(text)
-    end
-
-    def parse(text)
+    def info
       parser.new.parse(text)
     end
 
@@ -62,7 +58,7 @@ module Yt
     end
 
     def inject_dependencies(opts)
-      @parser      = opts.fetch :parser,      Yt::YTUrlParser
+      @parser      = opts.fetch :parser,      Yt::Parser
       @resource_id = opts.fetch :resource_id, Yt::YTResourceId
       @resources   = opts.fetch :resources,   Yt::YTResources
     end

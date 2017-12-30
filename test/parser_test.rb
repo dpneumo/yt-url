@@ -1,7 +1,7 @@
-require 'minitest/autorun'
+require_relative 'test_helper'
 require_relative '../lib/yt/parser'
 
-class YTUrlParserTest < MiniTest::Test
+class ParserTest < MiniTest::Test
   def setup
     @video_texts    = [ 'youtube.com/watch?v=abcd-123456',
                         'youtube.com/embed/efgh-123456',
@@ -13,7 +13,7 @@ class YTUrlParserTest < MiniTest::Test
                         'youtube.com/c/qrst-123456',
                         'youtube.com/user/qrst-123456',]
     @bad_url_texts  = [ 'youtube.bad/abcd', ]
-    @ytp = Yt::YTUrlParser.new
+    @ytp = Yt::Parser.new
   end
 
   def test_identifies_a_bad_yt_url

@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require_relative 'interface_test'
+require_relative 'test_helper'
 require_relative '../lib/yt/resources'
 
 class ResourcesTest < MiniTest::Test
@@ -13,7 +12,7 @@ class ResourcesTest < MiniTest::Test
     assert_equal Hash, Yt::YTResources.dictionary.class
   end
 
-  def test_dictionary_returned_lambda_raises_error_for_call_to_invalid_resource_kind
+  def test_dictionary_default_lambda_raises_error_when_called
     assert_raises Yt::NoItemsError do
       Yt::YTResources.dictionary['invalid_key'].call({})
     end

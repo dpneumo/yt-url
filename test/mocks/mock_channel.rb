@@ -1,10 +1,8 @@
-module Yt
-  class MockChannel
-    def initialize(opts)
-    end
+class MockChannel
+  def initialize(opts)
+  end
 
-    def describe
-      'a channel resource'
-    end
+  def describe
+    'a channel resource'
   end
 end

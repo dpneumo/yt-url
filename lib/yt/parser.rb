@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 require_relative 'patterns'
 module Yt
-  class YTUrlParser
+  class Parser
+    # @param [Patterns] class the class holding the regexps used for parsing the url.
+    def initialize(patterns = Patterns)
+      @patterns = patterns.new.unfolded
+      freeze
+    end
+
     # @param [String] text the URL to be parsed
     # @return [Hash] the information parsed out of the text
     def parse(text)
@@ -13,11 +19,6 @@ module Yt
 
   private
     attr_reader :patterns
-
-    def initialize(patterns = Patterns)
-      @patterns = patterns.new.unfolded
-      freeze
-    end
 
     def tag_captures(m,kind)
       m.named_captures.merge(kind: kind)
