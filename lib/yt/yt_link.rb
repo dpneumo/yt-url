@@ -5,7 +5,7 @@ module Yt
       parms = "/#{url_elements['format']}#{url_elements['name']}"
       response = http_get(parms)
       if response.is_a? Net::HTTPRedirection
-        query response[location]
+        http_get(response[location])
       else
         response
       end

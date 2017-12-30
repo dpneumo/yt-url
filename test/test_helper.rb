@@ -1,3 +1,12 @@
+require 'simplecov'
+require 'coveralls'
+SimpleCov.start
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new [
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+
 require 'minitest/autorun'
 
 require_relative 'interface_tests'
