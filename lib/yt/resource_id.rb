@@ -12,6 +12,7 @@ module Yt
     # @return [<String, nil>] the ID of the YouTube resource
     # Will raise Yt::NoItemsError if the query response does not provide an ID
     def fetch_id
+      raise Yt::NoItemsError if url_elements[:kind] == :unknown
       response = yt_link.query_for_resource(url_elements)
       extract_id(response)
     end

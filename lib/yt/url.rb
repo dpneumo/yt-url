@@ -50,7 +50,8 @@ module Yt
     end
 
     def rsrc(options)
-      @rsrc ||= resources[kind].call options.merge(id: id)
+      options.merge(id: id)
+      resources[kind].call options
     end
 
     def resources
