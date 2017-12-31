@@ -50,8 +50,8 @@ module Yt
     end
 
     def rsrc(options)
-      options.merge(id: id)
-      resources[kind].call options
+      rsrc_opts = Marshal.load(Marshal.dump(options))
+      resources[kind].call rsrc_opts.merge(id: id)
     end
 
     def resources
