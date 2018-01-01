@@ -112,6 +112,10 @@ class IntegrationTest < MiniTest::Test
   end
 
   # Resource
+  #  Note: Webmock does not yet handle JSON in the body.
+  #        Thus cannot mock a response that provides the resource title, etc.
+  #        This is probably not required to validate yt-url internals.
+  #        However, at some point should validate yt-url's understanding of YouTube API.
   #    Channel
   def test_yturl_resource_returns_a_Yt_Channel_given_a_channel_url_c_an_existing_id
     yturl = Yt::URL.new('https://www.youtube.com/channel/UCxO1tY8h1AhOz0T4ENwmpow')
