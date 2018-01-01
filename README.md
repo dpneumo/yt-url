@@ -12,7 +12,7 @@ I used minitest rather than rspec. Just a personal preference. I find I have to 
 I hope this will be useful to others.
 
 
-Yt::URL helps you identify YouTube resources from their URL.
+### Yt::URL helps you identify YouTube resources from their URL.
 
 The **source code** is available on [GitHub](https://github.com/fullscreen/yt-url) and the **documentation** on [RubyDoc](http://www.rubydoc.info/gems/yt-url/frames).
 
